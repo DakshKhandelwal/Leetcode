@@ -19,11 +19,6 @@ bool subsetSum(vector<int> arr, int sum)
     {
         for(int j=1; j<sum+1; j++)
         {
-            if(i==0)
-                dp[i][j]=false;
-            
-            if(j==0)
-                dp[i][j]=true;
             
             if(arr[i-1]<= j)
                 dp[i][j]= dp[i-1][j-arr[i-1]] || dp[i-1][j];
