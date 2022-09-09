@@ -1,21 +1,20 @@
-int f(vector<int> &nums, int n, vector<int>&dp)
-{
-    if(n==0) return nums[n];
-    
-    if(n<0) return 0;
-    
-    if(dp[n]!=-1) return dp[n];
-    
-    int pick = nums[n] + f(nums, n-2, dp);
-    int notpick = 0 + f(nums, n-1, dp);
-    return dp[n] = max(pick, notpick);
-}
-
 class Solution {
 public:
     int rob(vector<int>& nums) {
         int n=nums.size();
-        vector<int> dp(n+1, -1);
-        return f(nums, n-1, dp);
+        vector<int> dp(n+1, 0);
+        int t1, t2;
+        dp[0] = nums[0];
+        
+        for(int i=1; i<n; i++)
+        {        
+            t1 = nums[i];
+            if(i>1) t1+= dp[i-2];
+
+            t2 = 0 + dp[i-1];
+
+            dp[i] = max(t1,t2);
+        }
+        return dp[n-1];
     }
 };
